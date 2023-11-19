@@ -8,7 +8,7 @@ import {AntDesign, FontAwesome, MaterialCommunityIcons, Feather} from '@expo/vec
 const IconButton = ({title, onPress, icon, style}) => {
     return (
         <TouchableOpacity style={style} onPress={onPress}>
-            <View style={{alignItems: 'center', padding: 5}}>
+            <View style={{alignItems: 'center', padding: 10}}>
                 {icon()}
                 <Text>{title}</Text>
             </View>
