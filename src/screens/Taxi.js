@@ -10,7 +10,7 @@ const data = [
         number: '098-932-4035',
         icon: () => {
             return(
-                <FontAwesome name="taxi" size={24} color="black"/>
+                <FontAwesome name="taxi" size={20} color="black"/>
             )
         }
     },
@@ -20,7 +20,7 @@ const data = [
         number: '098-970-8888',
         icon: () => {
             return(
-                <MaterialCommunityIcons name="panda" size={24} color="black"/>
+                <MaterialCommunityIcons name="panda" size={20} color="black"/>
             )
         }
     }
@@ -33,7 +33,7 @@ const Item = ({item, onPress, backgroundColor, textColor}) => (
                 <item.icon />
                 <Text style={[styles.title, {color: textColor}]}>{item.title}</Text>
             </View>
-            <AntDesign name="phone" size={24} color="black"/>
+            <AntDesign name="phone" size={30} color="black"/>
         </View>
     </TouchableOpacity>
 )
