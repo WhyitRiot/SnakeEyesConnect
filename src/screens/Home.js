@@ -1,10 +1,10 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity, Image, ImageBackground, Button, Text, View} from 'react-native'
+import { StyleSheet, TouchableOpacity, Image, ImageBackground, Button, Text, View, ScrollView, FlatList} from 'react-native'
 import {SafeAreaView} from 'react-native-safe-area-context'
 import {useFonts} from '@expo-google-fonts/inter'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import {AntDesign, FontAwesome, MaterialCommunityIcons, Feather, Ionicons} from '@expo/vector-icons'
-
+//Icon button: <IconButton title="Alerts" onPress={()=>navigation.navigate('Alerts')} icon={() => (<Feather name="alert-circle" size={30} color="black"/>)} style={styles.button} />
 const IconButton = ({title, onPress, icon, style}) => {
     return (
         <TouchableOpacity style={style} onPress={onPress}>
@@ -16,19 +16,86 @@ const IconButton = ({title, onPress, icon, style}) => {
     )
 }
 
+const data = [
+    {
+        id: '00',
+        title: 'Notification 1 Text, test overflow',
+        date: '11-26-2023 16:47'
+    },
+    {
+        id: '01',
+        title: 'Notification 2 Text',
+        date: '11-26-2023 16:45'
+    },
+    {
+        id: '02',
+        title: 'Notification 2 Text',
+        date: '11-26-2023 16:45'
+    },
+    {
+        id: '03',
+        title: 'Notification 2 Text',
+        date: '11-26-2023 16:45'
+    },
+    {
+        id: '04',
+        title: 'Notification 2 Text',
+        date: '11-26-2023 16:45'
+    },
+    {
+        id: '05',
+        title: 'Notification 2 Text',
+        date: '11-26-2023 16:45'
+    },
+]
+
+const Item = ({item}) => (  
+    <View style={{flexWrap: 'wrap'}}>
+        <Text style={{}}>{item.title}</Text>
+        <Text sylte={{}}>{item.date}</Text>
+    </View>
+)
+
+const renderSeparator = () => (
+    <View style={{backgroundColor: 'black', height: 1}} />
+);
+
 const Home = ({navigation}) =>{
+
+    const renderItem = ({item}) => {
+        const backgroundColor = 'white' 
+        const color = 'black'
+        return (
+            <Item
+                item={item}
+                backgroundColor={backgroundColor}
+                textColor={color}
+            />
+        )
+    }
+
     return (
         <ImageBackground source={require('../../assets/11ADA.jpg')} style={styles.imageLayout}>
             <SafeAreaView style={styles.container}>
                 <Image source={require('../../assets/out.png')} style={styles.image}></Image>
                 <View style={styles.buttonWrapper}>
-                    <View style={styles.buttonContainer}>
-                        <IconButton title="Alerts" onPress={()=>navigation.navigate('Alerts')} icon={() => (<Feather name="alert-circle" size={30} color="black"/>)} style={styles.button} />
-                        <IconButton title="Phonebook" onPress={()=>navigation.navigate('Phonebook')} icon={() => (<AntDesign name="phone" size={30} color="black"/>)} style={styles.button} />
-                        <IconButton title="Taxi" onPress={()=>navigation.navigate('Taxi')} icon={() => (<FontAwesome name="taxi" size={30} color="black"/>)} style={styles.button} />
+                    <View style={styles.alertContainer}>
+                        <Text style={{alignSelf: 'center', fontWeight: 'bold', fontSize: 20}}>Alerts</Text>
+                        <View style={styles.alertList}>
+                            <FlatList
+                                data={data}
+                                renderItem={renderItem}
+                                keyExtractor={item => item.id}
+                                ItemSeparatorComponent={renderSeparator}
+                                //ListHeaderComponent={renderSeparator}
+                                //ListFooterComponent={renderSeparator}
+                            />
+                        </View>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <IconButton title="Emergency" onPress={()=>navigation.navigate('Phonebook')} icon={() => (<Ionicons name="medical" size={30} color="black"/>)} style={styles.button} />
+                        <IconButton title="Emergency" onPress={()=>navigation.navigate('Emergency')} icon={() => (<Ionicons name="medical" size={30} color="black"/>)} style={styles.button} />
+                        <IconButton title="Phonebook" onPress={()=>navigation.navigate('Phonebook')} icon={() => (<AntDesign name="phone" size={30} color="black"/>)} style={styles.button} />
+                        <IconButton title="Taxi" onPress={()=>navigation.navigate('Taxi')} icon={() => (<FontAwesome name="taxi" size={30} color="black"/>)} style={styles.button} />
                     </View>
                 </View>
             </SafeAreaView>
@@ -66,15 +133,32 @@ const styles = StyleSheet.create({
     },
     buttonWrapper:{
         padding: 30,
-        alignItems: 'center',
+        flexDirection: 'row',
+        alignItems: 'space-around',
         backgroundColor: 'rgba(217,217,214, 0.8)',
         borderRadius: 10
     },
-    buttonContainer:{
-        flexDirection: 'row', 
-        alignItems: 'space-around', 
-        justifyContent: 'center',
-        marginBottom: 10
+    buttonContainer:{ 
+        flexDirection: 'column',
+        alignItems: 'center', 
+        justifyContent: 'space-around',
+        marginBottom: 10,
+        marginLeft: 'auto'
+    },
+    alertContainer:{
+        flex: 1,
+        alignSelf: 'flex-start',
+        flexDirection: 'column'
+    },
+    alertList:{
+        justifyContent: 'space-around',
+        alignContent: 'space-between',
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 6,
+        paddingLeft: 5,
+        paddingRight: 5,
+        paddingBottom: 10
     },
     button:{
         shadowColor: 'rgba(0,0,0, .4)',
