@@ -50,7 +50,7 @@ const data = [
 ]
 
 const Item = ({item}) => (  
-    <View style={{flexWrap: 'wrap'}}>
+    <View style={{}}>
         <Text style={{}}>{item.title}</Text>
         <Text sylte={{}}>{item.date}</Text>
     </View>
@@ -87,8 +87,7 @@ const Home = ({navigation}) =>{
                                 renderItem={renderItem}
                                 keyExtractor={item => item.id}
                                 ItemSeparatorComponent={renderSeparator}
-                                //ListHeaderComponent={renderSeparator}
-                                //ListFooterComponent={renderSeparator}
+                                style={{height: 200}}
                             />
                         </View>
                     </View>
