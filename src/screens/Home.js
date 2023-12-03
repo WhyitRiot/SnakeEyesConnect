@@ -8,7 +8,7 @@ import Notification from '../components/Notification'
 //Icon button: <IconButton title="Alerts" onPress={()=>navigation.navigate('Alerts')} icon={() => (<Feather name="alert-circle" size={30} color="black"/>)} style={styles.button} />
 const IconButton = ({title, onPress, icon, style}) => {
     return (
-        <TouchableOpacity style={style} onPress={onPress}>
+        <TouchableOpacity style={[styles.touchableOpacity, style]} onPress={onPress}>
             <View style={{alignItems: 'center', padding: 10}}>
                 {icon()}
                 <Text>{title}</Text>
@@ -154,6 +154,7 @@ const styles = StyleSheet.create({
     },
     alertContainer:{
         flex: 1,
+        marginRight: 10,
         alignSelf: 'flex-start',
         flexDirection: 'column'
     },
@@ -165,7 +166,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         paddingLeft: 5,
         paddingRight: 5,
-        paddingBottom: 10
+        paddingBottom: 15
     },
     button:{
         shadowColor: 'rgba(0,0,0, .4)',
@@ -176,7 +177,12 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(128, 128, 128, 0.8)',
         borderWidth: 1,
         backgroundColor: 'rgba(242,233,234, 0.8)',
-        borderRadius: 10
+        borderRadius: 10,
+        margin: 5
+    },
+    touchableOpacity:{
+        height: 80,
+        width: 100
     }
 })
 
