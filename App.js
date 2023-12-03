@@ -11,6 +11,7 @@ import Buttons from './src/components/Buttons'
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  //const notif = Notifications();
   return (
     <NavigationContainer>
       <Buttons />

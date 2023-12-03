@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, TouchableOpacity, Image, ImageBackground, Button, Text, View, ScrollView, FlatList} from 'react-native'
 import {SafeAreaView} from 'react-native-safe-area-context'
 import {useFonts} from '@expo-google-fonts/inter'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import {AntDesign, FontAwesome, MaterialCommunityIcons, Feather, Ionicons} from '@expo/vector-icons'
+import Notifications from './src/components/Notifications';
 //Icon button: <IconButton title="Alerts" onPress={()=>navigation.navigate('Alerts')} icon={() => (<Feather name="alert-circle" size={30} color="black"/>)} style={styles.button} />
 const IconButton = ({title, onPress, icon, style}) => {
     return (
@@ -51,8 +52,8 @@ const data = [
 
 const Item = ({item}) => (  
     <View style={{}}>
-        <Text style={{}}>{item.title}</Text>
-        <Text sylte={{}}>{item.date}</Text>
+        <Text style={{}}>{item.request.content.title}</Text>
+        <Text sylte={{}}>{item.request.content.date}</Text>
     </View>
 )
 
@@ -61,7 +62,10 @@ const renderSeparator = () => (
 );
 
 const Home = ({navigation}) =>{
-
+    const [notifications, setNotifications] = useState([]);
+    const handleNotificationsReceived = (notification) =>{
+        setNotifications((prevNotifications) => [...prevNotifications, notification])
+    };
     const renderItem = ({item}) => {
         const backgroundColor = 'white' 
         const color = 'black'
@@ -78,14 +82,15 @@ const Home = ({navigation}) =>{
         <ImageBackground source={require('../../assets/11ADA.jpg')} style={styles.imageLayout}>
             <SafeAreaView style={styles.container}>
                 <Image source={require('../../assets/out.png')} style={styles.image}></Image>
+                <Notifications onNotificationReceieved={handleNotificationsReceived} />
                 <View style={styles.buttonWrapper}>
                     <View style={styles.alertContainer}>
                         <Text style={{alignSelf: 'center', fontWeight: 'bold', fontSize: 20}}>Alerts</Text>
                         <View style={styles.alertList}>
                             <FlatList
-                                data={data}
+                                data={notifications}
                                 renderItem={renderItem}
-                                keyExtractor={item => item.id}
+                                keyExtractor={item => item.notificationId}
                                 ItemSeparatorComponent={renderSeparator}
                                 style={{height: 200}}
                             />
