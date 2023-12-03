@@ -9,7 +9,7 @@ import Notification from '../components/Notification'
 const IconButton = ({title, onPress, icon, style}) => {
     return (
         <TouchableOpacity style={[styles.touchableOpacity, style]} onPress={onPress}>
-            <View style={{alignItems: 'center', padding: 10}}>
+            <View style={{alignItems: 'center', justifyItems: 'center', padding: 10}}>
                 {icon()}
                 <Text>{title}</Text>
             </View>
@@ -50,10 +50,22 @@ const data = [
     },
 ]
 
+const parseDate = ({date}) => {
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1; // Months are zero-based
+    let day = date.getDate();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+    let formatedTime = `${month < 10 ? '0' + month: month}/${day}/${year} ${hours}:${minutes}`;
+    //`${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day} ${hours}:${minutes}:${seconds}`
+    return(formatedTime);
+}
+
 const Item = ({item}) => (  
     <View style={{}}>
         <Text style={{}}>{item.request.content.title}</Text>
-        <Text style={{}}>{item.date}</Text>
+        <Text style={{}}>{parseDate({date: new Date(item.date) })}</Text>
     </View>
 )
 
@@ -64,8 +76,7 @@ const renderSeparator = () => (
 const Home = ({navigation}) =>{
     const [notifications, setNotifications] = useState([]);
     const handleNotificationsReceived = (_notification) =>{
-        console.log(_notification);
-        setNotifications((prevNotifications) => [...prevNotifications, _notification])
+        setNotifications((prevNotifications) => [_notification, ...prevNotifications])
     };
     const renderItem = ({item}) => {
 
