@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "221895328503",
+    "project_id": "snakeeyesconnect-1e632",
+    "storage_bucket": "snakeeyesconnect-1e632.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:221895328503:android:5490a14207e02bbda0c9f2",
+        "android_client_info": {
+          "package_name": "com.ada.SnakeEyesConnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmBdxAhhNb90I1Eeh_PR-SDY3utWvhgEE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

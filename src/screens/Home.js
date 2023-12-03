@@ -4,7 +4,7 @@ import {SafeAreaView} from 'react-native-safe-area-context'
 import {useFonts} from '@expo-google-fonts/inter'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import {AntDesign, FontAwesome, MaterialCommunityIcons, Feather, Ionicons} from '@expo/vector-icons'
-import Notifications from './src/components/Notifications';
+import Notification from '../components/Notification'
 //Icon button: <IconButton title="Alerts" onPress={()=>navigation.navigate('Alerts')} icon={() => (<Feather name="alert-circle" size={30} color="black"/>)} style={styles.button} />
 const IconButton = ({title, onPress, icon, style}) => {
     return (
@@ -53,7 +53,7 @@ const data = [
 const Item = ({item}) => (  
     <View style={{}}>
         <Text style={{}}>{item.request.content.title}</Text>
-        <Text sylte={{}}>{item.request.content.date}</Text>
+        <Text style={{}}>{item.date}</Text>
     </View>
 )
 
@@ -63,10 +63,13 @@ const renderSeparator = () => (
 
 const Home = ({navigation}) =>{
     const [notifications, setNotifications] = useState([]);
-    const handleNotificationsReceived = (notification) =>{
-        setNotifications((prevNotifications) => [...prevNotifications, notification])
+    const handleNotificationsReceived = (_notification) =>{
+        console.log(_notification);
+        setNotifications((prevNotifications) => [...prevNotifications, _notification])
     };
     const renderItem = ({item}) => {
+
+        console.log('Rendering item:', item);
         const backgroundColor = 'white' 
         const color = 'black'
         return (
@@ -82,7 +85,7 @@ const Home = ({navigation}) =>{
         <ImageBackground source={require('../../assets/11ADA.jpg')} style={styles.imageLayout}>
             <SafeAreaView style={styles.container}>
                 <Image source={require('../../assets/out.png')} style={styles.image}></Image>
-                <Notifications onNotificationReceieved={handleNotificationsReceived} />
+                <Notification onNotificationReceived={handleNotificationsReceived} />
                 <View style={styles.buttonWrapper}>
                     <View style={styles.alertContainer}>
                         <Text style={{alignSelf: 'center', fontWeight: 'bold', fontSize: 20}}>Alerts</Text>
@@ -90,7 +93,7 @@ const Home = ({navigation}) =>{
                             <FlatList
                                 data={notifications}
                                 renderItem={renderItem}
-                                keyExtractor={item => item.notificationId}
+                                keyExtractor={item => item.request.identifier}
                                 ItemSeparatorComponent={renderSeparator}
                                 style={{height: 200}}
                             />
