@@ -17,39 +17,6 @@ const IconButton = ({title, onPress, icon, style}) => {
     )
 }
 
-const data = [
-    {
-        id: '00',
-        title: 'Notification 1 Text, test overflow',
-        date: '11-26-2023 16:47'
-    },
-    {
-        id: '01',
-        title: 'Notification 2 Text',
-        date: '11-26-2023 16:45'
-    },
-    {
-        id: '02',
-        title: 'Notification 2 Text',
-        date: '11-26-2023 16:45'
-    },
-    {
-        id: '03',
-        title: 'Notification 2 Text',
-        date: '11-26-2023 16:45'
-    },
-    {
-        id: '04',
-        title: 'Notification 2 Text',
-        date: '11-26-2023 16:45'
-    },
-    {
-        id: '05',
-        title: 'Notification 2 Text',
-        date: '11-26-2023 16:45'
-    },
-]
-
 const parseDate = ({date}) => {
     let year = date.getFullYear();
     let month = date.getMonth() + 1; // Months are zero-based
@@ -64,7 +31,7 @@ const parseDate = ({date}) => {
 
 const Item = ({item}) => (  
     <View style={{}}>
-        <Text style={{}}>{item.request.content.title}</Text>
+        <Text style={{}}>{item.request ? item.request.content.title : item.title}</Text>
         <Text style={{}}>{parseDate({date: new Date(item.date) })}</Text>
     </View>
 )
@@ -74,9 +41,40 @@ const renderSeparator = () => (
 );
 
 const Home = ({navigation}) =>{
-    const [notifications, setNotifications] = useState([]);
-    const handleNotificationsReceived = (_notification) =>{
-        setNotifications((prevNotifications) => [_notification, ...prevNotifications])
+    const [notifications, setNotifications] = useState([
+        {
+            id: '00',
+            title: 'Notification 1 Text test overflow: This should wrap correctly.',
+            date: 1703032373842
+        },
+        {
+            id: '01',
+            title: 'Notification 2 Text',
+            date: 1703032373842
+        },
+        {
+            id: '02',
+            title: 'Notification 2 Text',
+            date: 1703032373842
+        },
+        {
+            id: '03',
+            title: 'Notification 2 Text',
+            date: 1703032373842
+        },
+        {
+            id: '04',
+            title: 'Notification 2 Text',
+            date: 1703032373842
+        },
+        {
+            id: '05',
+            title: 'Notification 2 Text',
+            date: 1703032373842
+        },
+    ])
+    const handleNotificationsReceived = (notification) =>{
+        setNotifications((prevNotifications) => [notification, ...prevNotifications])
     };
     const renderItem = ({item}) => {
 
@@ -104,7 +102,7 @@ const Home = ({navigation}) =>{
                             <FlatList
                                 data={notifications}
                                 renderItem={renderItem}
-                                keyExtractor={item => item.request.identifier}
+                                keyExtractor={item => item.request ? item.request.identifier : item.id}
                                 ItemSeparatorComponent={renderSeparator}
                                 style={{height: 200}}
                             />
