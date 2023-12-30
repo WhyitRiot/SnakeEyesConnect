@@ -8,5 +8,6 @@
 4. npm install expo
 5. git clone
 6. cd into directory
-7. npm install @react-navigation/native @react-navigation/native-stack @expo/vector-icons
+7. npm install @react-navigation/native @react-navigation/native-stack @expo/vector-icons @react-navigation/drawer
 8. npx expo install react-native-screens react-native-safe-area-context expo-font @expo-google-fonts/inter
+9. npx expo install @react-native-community/netinfo react-native-gesture-handler react-native-reanimated
