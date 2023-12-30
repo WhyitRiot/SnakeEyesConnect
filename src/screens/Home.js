@@ -5,6 +5,9 @@ import {useFonts} from '@expo-google-fonts/inter'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import {AntDesign, FontAwesome, MaterialCommunityIcons, Feather, Ionicons} from '@expo/vector-icons'
 import Notification from '../components/Notification'
+import { NavigationContainer } from '@react-navigation/native'
+import { createDrawerNavigator } from '@react-navigation/drawer'
+
 //Icon button: <IconButton title="Alerts" onPress={()=>navigation.navigate('Alerts')} icon={() => (<Feather name="alert-circle" size={30} color="black"/>)} style={styles.button} />
 const IconButton = ({title, onPress, icon, style}) => {
     return (
@@ -94,7 +97,7 @@ const Home = ({navigation}) =>{
         <ImageBackground source={require('../../assets/11ADA.jpg')} style={styles.imageLayout}>
             <SafeAreaView style={styles.container}>
                 <Image source={require('../../assets/out.png')} style={styles.image}></Image>
-                <IconButton title='' onPress={()=>console.log('Pressed')} icon={() => (<Ionicons name="reorder-three-sharp" size={35} color="black" />)} style={styles.menuButton} />
+                <IconButton title='' onPress={()=>navigation.toggleDrawer()} icon={() => (<Ionicons name="reorder-three-sharp" size={35} color="black" />)} style={styles.menuButton} />
                 <Notification onNotificationReceived={handleNotificationsReceived} />
                 <View style={styles.buttonWrapper}>
                     <View style={styles.alertContainer}>
