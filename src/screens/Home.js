@@ -94,6 +94,7 @@ const Home = ({navigation}) =>{
         <ImageBackground source={require('../../assets/11ADA.jpg')} style={styles.imageLayout}>
             <SafeAreaView style={styles.container}>
                 <Image source={require('../../assets/out.png')} style={styles.image}></Image>
+                <IconButton title='' onPress={()=>console.log('Pressed')} icon={() => (<Ionicons name="reorder-three-sharp" size={35} color="black" />)} style={styles.menuButton} />
                 <Notification onNotificationReceived={handleNotificationsReceived} />
                 <View style={styles.buttonWrapper}>
                     <View style={styles.alertContainer}>
@@ -192,6 +193,13 @@ const styles = StyleSheet.create({
     touchableOpacity:{
         height: 80,
         width: 100
+    },
+    menuButton:{
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        marginRight: 0,
+        marginTop: 30,
     }
 })
 
